@@ -16,6 +16,7 @@ import {
   Select,
   FormHelperText,
 } from "@material-ui/core";
+import { Loading } from "../../elements/Loading";
 
 function Home() {
   const [page, setPage] = useState(1);
@@ -25,12 +26,14 @@ function Home() {
   const [year, setYear] = useState("");
   const [language, setLanguage] = useState(EN_LANGUAGE);
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const classes = useStyles();
 
   useEffect(() => {
     const getMovies = async () => {
       const returnedMovies = await getAllMovies(page);
+      setIsLoading(false);
       setMovies(returnedMovies.results);
       setPageLimit(returnedMovies.total_pages);
     };
@@ -142,31 +145,38 @@ function Home() {
         </Container>
       </Container>
       <Container className={classes.contentContainer} maxWidth="md">
-        <Grid container spacing={3}>
-          {movies.map((movie) => {
-            return (
-              <Grid item xs={12} sm={4}>
-                <MovieCard movie={movie} />
-              </Grid>
-            );
-          })}
-        </Grid>
-        <Box className={classes.paginationContainer}>
-          <Button
-            className={`${classes.button} ${classes.previousButton}`}
-            disabled={page === 1}
-            onClick={previousPageHandler}
-          >
-            Previous page
-          </Button>
-          <Button
-            className={`${classes.button} ${classes.nextButton}`}
-            onClick={nextPageHandler}
-            disabled={pageLimit === page}
-          >
-            Next page
-          </Button>
-        </Box>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <Grid container spacing={3}>
+              {movies.map((movie) => {
+                return (
+                  <Grid item xs={12} sm={4}>
+                    <MovieCard movie={movie} />
+                  </Grid>
+                );
+              })}
+            </Grid>
+
+            <Box className={classes.paginationContainer}>
+              <Button
+                className={`${classes.button} ${classes.previousButton}`}
+                disabled={page === 1}
+                onClick={previousPageHandler}
+              >
+                Previous page
+              </Button>
+              <Button
+                className={`${classes.button} ${classes.nextButton}`}
+                onClick={nextPageHandler}
+                disabled={pageLimit === page}
+              >
+                Next page
+              </Button>
+            </Box>
+          </>
+        )}
       </Container>
     </div>
   );
@@ -193,9 +203,9 @@ const useStyles = makeStyles({
   },
   paginationContainer: {
     marginTop: 50,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   button: {
     height: 50,
