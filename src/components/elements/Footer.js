@@ -33,7 +33,7 @@ export const Footer = () => {
 const useStyles = makeStyles({
   root: {
     width: "100%",
-    minHeight: 300,
+    height: 300,
     backgroundColor: "#A55DCB",
   },
   footerContainer: {

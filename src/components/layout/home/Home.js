@@ -17,6 +17,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { Loading } from "../../elements/Loading";
+import { NoResults } from "../../elements/NoResults";
 
 function Home() {
   const [page, setPage] = useState(1);
@@ -147,6 +148,8 @@ function Home() {
       <Container className={classes.contentContainer} maxWidth="md">
         {isLoading ? (
           <Loading />
+        ) : movies.length === 0 ? (
+          <NoResults />
         ) : (
           <>
             <Grid container spacing={3}>

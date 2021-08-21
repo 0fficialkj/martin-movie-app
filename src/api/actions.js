@@ -18,11 +18,11 @@ export const getImdbId = async (id) => {
 export const getFilteredMovies = async (keyword, year, language, page) => {
   let keywordId;
 
-  if(keyword) {
+  if (keyword) {
     const keywordIds = await fetch(
       `https://api.themoviedb.org/3/search/keyword?api_key=${API_KEY}&query=${keyword}`
     ).then((data) => data.json());
-  
+
     keywordId = keywordIds.results.find((keywordId) => {
       if (keywordId.name === keyword) {
         return keywordId;
@@ -30,17 +30,21 @@ export const getFilteredMovies = async (keyword, year, language, page) => {
     });
   }
 
+  console.log(keywordId);
+
   let filteredMovies;
 
   try {
     filteredMovies = await fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=${language}&page=${page}&year=${year}&with_keywords=${keywordId ? keywordId.id : ""}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=${language}&page=${page}&year=${year}&with_keywords=${
+        keywordId ? keywordId.id : keyword ? keyword : ""
+      }`
     ).then((data) => data.json());
   } catch (error) {
     filteredMovies = { results: [], total_pages: 1 };
   }
 
-  console.log(filteredMovies)
+  console.log(filteredMovies);
   return filteredMovies;
 };
 

@@ -13,7 +13,7 @@ export const Loading = () => {
 
 const useStyles = makeStyles({
   root: {
-    height: 300,
+    height: 370,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
