@@ -30,12 +30,12 @@ function MovieCard(movie) {
   useEffect(() => {
     const getId = async () => {
       setImdbId(await getImdbId(id));
-    }
+    };
 
     getId();
     setGenres(getGenres(genre_ids));
     seenChecker();
-  }, [id])
+  }, [id]);
 
   const seenChecker = () => {
     const seenList = JSON.parse(localStorage.getItem("martinsMovies"));
@@ -44,7 +44,7 @@ function MovieCard(movie) {
       if (result.length === 1) {
         setWatched(true);
       } else {
-        setWatched(false)
+        setWatched(false);
       }
     }
   };
@@ -199,6 +199,8 @@ const useStyles = makeStyles({
   },
   watchedButton: {
     border: "1px solid #4caf50",
+    backgroundColor: "#4caf50",
+    color: "white",
   },
   unwatchedButton: {
     border: "1px solid #A55DCB",
