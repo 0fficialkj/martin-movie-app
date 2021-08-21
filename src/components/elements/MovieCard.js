@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { getImdbId, getGenres } from "../../api/actions";
 import { IMAGE_URL, IMDB_URL } from "../../api/constants";
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,21 +27,25 @@ function MovieCard(movie) {
 
   const classes = useStyles();
 
-  const getId = useCallback(async () => {
-    setImdbId(await getImdbId(id));
-  }, [id]);
-
   useEffect(() => {
+    const getId = async () => {
+      setImdbId(await getImdbId(id));
+    }
+
     getId();
     setGenres(getGenres(genre_ids));
     seenChecker();
-  }, []);
+  }, [id])
 
   const seenChecker = () => {
     const seenList = JSON.parse(localStorage.getItem("martinsMovies"));
     if (seenList) {
       const result = seenList.filter((movie) => movie.id === id);
-      if (result.length > 0) setWatched(true);
+      if (result.length === 1) {
+        setWatched(true);
+      } else {
+        setWatched(false)
+      }
     }
   };
 
