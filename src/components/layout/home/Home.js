@@ -193,6 +193,9 @@ const useStyles = makeStyles({
   },
   paginationContainer: {
     marginTop: 50,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   button: {
     height: 50,
