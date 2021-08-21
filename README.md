@@ -12,7 +12,7 @@ In this `README.md` file, there will be intructions on how to set up the app loc
 
 ```sh
 # Clone
-$ git clone
+$ git clone https://github.com/0fficialkj/martin-movie-app.git
 $ cd martin-movie-app
 
 # Install dependencies

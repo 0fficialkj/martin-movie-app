@@ -9,7 +9,7 @@ export default function Navbar() {
   const classes = useStyles();
 
   const links = [
-    { name: "Home", href: "#" },
+    { name: "Home", href: "http://localhost:3000/" },
     { name: "Pages", href: "#" },
     { name: "Movies & TV Shows", href: "#" },
     { name: "Blog", href: "#" },

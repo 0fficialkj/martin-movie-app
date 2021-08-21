@@ -30,8 +30,6 @@ export const getFilteredMovies = async (keyword, year, language, page) => {
     });
   }
 
-  console.log(keywordId);
-
   let filteredMovies;
 
   try {
@@ -44,7 +42,6 @@ export const getFilteredMovies = async (keyword, year, language, page) => {
     filteredMovies = { results: [], total_pages: 1 };
   }
 
-  console.log(filteredMovies);
   return filteredMovies;
 };
 
